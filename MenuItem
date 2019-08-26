@@ -4,29 +4,29 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Item = styled(Link)`
-  color: #4a4a4a;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-size: 1rem;
-  padding: 4px 16px 4px 16px;
-  min-height: 48px;
-  width: auto;
-  :hover {
-    background: rgba(0, 0, 0, 0.08);
-  }
+   color: ${props => (props.color ? props.color : '#4a4a4a')};
+   text-decoration: none;
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+   font-size: ${props => (props.fontSize ? props.fontSize : '1rem')};
+   padding: 4px 16px 4px 16px;
+   min-height: 48px;
+   width: auto;
+   :hover {
+      background: rgba(0, 0, 0, 0.08);
+   }
 `;
 
 export const MenuItem = ({ children, to, ...props }) => (
-  <Item {...props} to={to}>
-    {children}
-  </Item>
+   <Item {...props} to={to}>
+      {children}
+   </Item>
 );
 
 MenuItem.propTypes = {
-  children: PropTypes.any,
-  to: PropTypes.any,
+   children: PropTypes.any,
+   to: PropTypes.any
 };
 
 export default MenuItem;
