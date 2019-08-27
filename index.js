@@ -5,7 +5,6 @@ import { Button, Card, Flex } from 'components';
 
 const MenuContainer = styled.div`
    position: relative;
-   float: ${props => (props.float ? props.float : null)};
    width: fit-content;
    overflow: visible;
 `;
@@ -30,6 +29,7 @@ const MenuList = styled(Flex)`
 `;
 
 export const Menu = ({
+   bg,
    float,
    label,
    children,
@@ -37,7 +37,7 @@ export const Menu = ({
    icon,
    listBackground,
    listLeft,
-   bg,
+   style,
    ...props
 }) => {
    const node = useRef();
@@ -67,7 +67,7 @@ export const Menu = ({
    };
 
    return (
-      <MenuContainer float={float} ref={node}>
+      <MenuContainer style={style} ref={node}>
          <MenuButton
             {...props}
             bg={bg}
@@ -86,7 +86,7 @@ export const Menu = ({
             <MenuListContainer
                {...props}
                bg={listBackground || 'paper'}
-               listLeft={float === 'right' || listLeft}
+               listLeft={(style && style.float === 'right') || listLeft}
             >
                <MenuList onClick={e => handleChange(e)}>{children}</MenuList>
             </MenuListContainer>
@@ -102,7 +102,8 @@ Menu.propTypes = {
    children: PropTypes.any,
    icon: PropTypes.any,
    listBackground: PropTypes.string,
-   listLeft: PropTypes.bool
+   listLeft: PropTypes.bool,
+   style: PropTypes.object
 };
 
 export default Menu;
